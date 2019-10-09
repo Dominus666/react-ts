@@ -3,11 +3,14 @@ import './Buttons.scss';
 
 interface Props {
   text: string,
-  className: string
+  className: string,
+  onClick(): void;
 }
 
 const Buttons = (props: Props) => {
-  <button className={props.className}>{props.text}</button>
+  return(
+    <button className={props.className} onClick={props.onClick}>{props.text}</button>
+  )
 };
 
 export default Buttons
