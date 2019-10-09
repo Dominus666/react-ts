@@ -1,0 +1,14 @@
+input {
+  margin: 5px 0;
+  padding: 0 10px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid gray;
+  background-color: transparent;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  &:focus {
+    border-bottom-color: rgb(89, 89, 247);
+  }
+}
