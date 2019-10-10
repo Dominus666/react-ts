@@ -1,25 +1,34 @@
 import React from 'react';
+import './Products.scss';
 import { connect } from 'react-redux';
+import CardProduct from './CardProduct/CardProduct';
 
 interface Props {
   products: {
-    name: string;
-    description: string;
-    price: number;
-    imgSrc: string;
+    products: [
+      {
+        name: string;
+        description: string;
+        price: number;
+        imgSrc: string
+      }
+    ]
   }
 };
-interface State {};
+interface State { };
 
 class Products extends React.Component<Props, State> {
 
+
   render() {
     console.log(this.props)
-    const productsInit = [
-      {}
-    ]
-    return(
-      <h1>Products</h1>
+    const products = this.props.products.products.map((product, index) => {
+      return <CardProduct name={product.name} description={product.description} price={product.price} imgSrc={product.imgSrc} key={index}/>
+    })
+    return (
+      <div className="products-wrapper">
+        {products}
+      </div>
     )
   }
 };
