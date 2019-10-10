@@ -1,13 +1,24 @@
 import React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './Main.scss';
 import Auth from '../pages/Auth/Auth';
 import Home from '../pages/Home/Home';
+import Products from '../pages/Products/Products';
 
-interface State { }
-interface Props { }
+
+interface State {
+  drawer: boolean;
+}
+interface Props {
+  user: {
+    email: string;
+    role: number;
+  };
+}
 
 class Main extends React.Component<Props, State> {
+
   render() {
     const linksInit = [
       {
@@ -15,32 +26,42 @@ class Main extends React.Component<Props, State> {
         to: '/'
       },
       {
-        name: 'Sign In',
-        to: '/sign-in'
+        name: 'Products',
+        to: '/products'
       }
     ];
-
     const links = linksInit.map((link, index) => {
       return (
-        <li key={index}>
-          <Link to={link.to}>{link.name}</Link>
-        </li>
+        <Link className="link" to={link.to} key={index}>{link.name}</Link>
       )
     });
     return (
       <div className="main-wrapper">
         <div className="header">
-          <ul>
+          <div>
             {links}
-          </ul>
+          </div>
+          <div>
+            {
+              this.props.user.email === ''
+                ? <Link className="link" to="/sign-in">Sign In</Link>
+                : <span>Sign Out</span>
+            }
+          </div>
+
         </div>
         <div className="body">
           <Route path="/" exact component={Home} />
+          <Route path="/products" component={Products} />
           <Route path="/sign-in" component={Auth} />
         </div>
       </div>
+
     )
   }
 }
+const mapStateToProps = (state: any) => ({
+  user: state.AuthReducer,
+})
 
-export default Main;
+export default connect(mapStateToProps)(Main);
