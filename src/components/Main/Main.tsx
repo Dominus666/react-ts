@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Main.scss';
+import Notifications from '../Notifications/Notifications';
 import Auth from '../pages/Auth/Auth';
 import Home from '../pages/Home/Home';
 import Products from '../pages/Products/Products';
@@ -37,6 +38,7 @@ class Main extends React.Component<Props, State> {
     });
     return (
       <div className="main-wrapper">
+        <Notifications />
         <div className="header">
           <div>
             {links}

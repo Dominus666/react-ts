@@ -2,7 +2,9 @@ import React from 'react';
 import './SignIn.scss';
 import { connect } from 'react-redux';
 import userModel from '../../../models/user.models';
-import * as actions from '../../../redux/actions/auth.actions';
+import notificationsModel from '../../../models/notifications.models';
+import * as actionsAuth from '../../../redux/actions/auth.actions';
+import * as actionsNotification from '../../../redux/actions/common.actions';
 import Inputs from '../../shared/Inputs/Inputs';
 import Buttons from '../../shared/Buttons/Buttons';
 
@@ -13,6 +15,7 @@ interface State {
 }
 interface Props { 
   signIn: (user: userModel) => void;
+  setNotification: (notification: notificationsModel) => void;
 }
 
 
@@ -34,8 +37,12 @@ class SignIn extends React.Component<Props, State> {
     } as Pick<State, keyof State>);
   }
   signIn = () => {
-    this.props.signIn(this.state)
+    // this.props.signIn(this.state);
+    this.props.setNotification({type: 'error', message: 'Error auth'})
   };
+  check = async () => {
+    await this.props.setNotification({type: 'success', message: 'success auth'})
+  }
   render() {
     const inputsInit = [
       {
@@ -56,6 +63,11 @@ class SignIn extends React.Component<Props, State> {
         text: 'signIn',
         className: 'btn',
         onClick: this.signIn
+      },
+      {
+        text: 'check',
+        className: 'btn',
+        onClick: this.check
       }
     ];
     const inputsSignIn = inputsInit.map((input, index) => {
@@ -83,7 +95,8 @@ const mapStateToProps = (state: any) => ({
     user: state.AuthReducer,
 })
 const mapDispatchToProps = (dispatch: any) => ({
-  signIn: (user: userModel) => dispatch(actions.signIn(user))
+  signIn: (user: userModel) => dispatch(actionsAuth.signIn(user)),
+  setNotification: (notification: notificationsModel) => dispatch(actionsNotification.setNotification(notification))
 });
 
 export default  connect(mapStateToProps, mapDispatchToProps)(SignIn);

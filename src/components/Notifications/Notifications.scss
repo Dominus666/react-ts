@@ -1,0 +1,36 @@
+.openModal {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  transition:
+   0.3s ease-out;
+}
+.closeModal {
+  position: absolute;
+  left: 50%;
+  top: -200px;
+  transform: translateX(-50%);
+  transition: 0.3s ease-out;
+}
+.notifications-wrapper {
+  width: 320px;
+  height: 75px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+  padding: 5px 10px;
+  &.error {
+    background-color: #D32F2F;
+  }
+  &.success {
+    background-color: #43A047;
+  }
+  .notifications-text {
+    display: flex;
+    align-items: center;
+  }
+}
