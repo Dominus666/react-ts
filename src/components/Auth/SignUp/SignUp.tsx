@@ -11,25 +11,22 @@ import Buttons from '../../shared/Buttons/Buttons';
 
 interface State {
   email: string;
-  userName: string;
-  uid: string;
   password: string;
+  confirmPassword: string;
   role: 0;
 }
 interface Props { 
-  signIn: (user: userModel) => void;
   setNotification: (notification: notificationsModel) => void;
 }
 
 
-class SignIn extends React.Component<Props, State> {
+class SignUp extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
       email: '',
-      userName: '',
-      uid: '',
       password: '',
+      confirmPassword: '',
       role: 0
     }
   }
@@ -41,29 +38,26 @@ class SignIn extends React.Component<Props, State> {
       [name]: value
     } as Pick<State, keyof State>);
   }
-  signIn = async () => {
+  signUp = async () => {
     try {
-      const user = {
-        email: this.state.email, 
-        userName: this.state.userName,
-        uid: this.state.uid,
-        role: 0
-      }
-      this.props.signIn(user);
+      
       await Firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     }catch(err) {
       this.props.setNotification({type: 'error', message: err.message})
     }  
   };
-  check = async () => {
-    await this.props.setNotification({type: 'success', message: 'success auth'})
-  }
   render() {
     const inputsInit = [
       {
         name: 'email',
         type: 'email',
         placeholder: 'email',
+        onChange: this.handleChange
+      },
+      {
+        name: 'userName',
+        type: 'text',
+        placeholder: 'userName',
         onChange: this.handleChange
       },
       {
@@ -75,15 +69,10 @@ class SignIn extends React.Component<Props, State> {
     ];
     const buttonsInit = [
       {
-        text: 'signIn',
+        text: 'signUp',
         className: 'btn',
-        onClick: this.signIn
+        onClick: this.signUp
       },
-      {
-        text: 'check',
-        className: 'btn',
-        onClick: this.check
-      }
     ];
     const inputsSignIn = inputsInit.map((input, index) => {
       return <Inputs name={input.name} type={input.type} placeholder={input.placeholder} key={index} onChange={input.onChange} />
@@ -92,8 +81,8 @@ class SignIn extends React.Component<Props, State> {
       return <Buttons text={btn.text} className={btn.className} onClick={btn.onClick} key={index} />
     });
     return (
-      <div className="sign-in-wrapper">
-        <div className="sign-in-form">
+      <div className="sign-up-wrapper">
+        <div className="sign-up-form">
           <div className="inputs">
             {inputsSignIn}
           </div>
@@ -114,4 +103,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   setNotification: (notification: notificationsModel) => dispatch(actionsNotification.setNotification(notification))
 });
 
-export default  connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default  connect(mapStateToProps, mapDispatchToProps)(SignUp);

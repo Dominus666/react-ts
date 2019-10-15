@@ -1,6 +1,5 @@
 let AuthDefaultState = {
   email: '',
-  password: '',
   role: 0
 }
 
