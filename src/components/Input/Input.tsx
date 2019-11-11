@@ -1,9 +1,10 @@
 import React from 'react';
+import './Input.scss';
 
 interface Props {
   name: string;
   type?: string;
-  placeholder: string;
+  placeholder?: string;
   textarea?: boolean;
   onChange(event: any): void
 }

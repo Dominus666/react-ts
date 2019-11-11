@@ -1,0 +1,10 @@
+.input-wrapper {
+  input, textarea {
+    resize: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+    padding: 10px;
+  }
+}

@@ -2,5 +2,26 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  
+  .post-inputs-wrapper  {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input-wrapper {
+      width: 100%;
+      input,textarea {
+        width: 100%;
+      }
+    }
+  }
+  .post-buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+  }
 }
