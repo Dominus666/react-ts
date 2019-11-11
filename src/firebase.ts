@@ -2,16 +2,17 @@ import * as firebase from "firebase/app";
 import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAuM1HW0dVaH3p2oRm53HP0BeGQhl0wHM8",
-    authDomain: "react-ts-90e84.firebaseapp.com",
-    databaseURL: "https://react-ts-90e84.firebaseio.com",
-    projectId: "react-ts-90e84",
-    storageBucket: "react-ts-90e84.appspot.com",
-    messagingSenderId: "210401852672",
-    appId: "1:210401852672:web:9a67bae784757462ba87e5",
-    measurementId: "G-EB7PYD0S6J"
+    apiKey: "AIzaSyCpWVRKKwLJvGkOzCspK3nTWHFDvi1Wu-Q",
+    authDomain: "beer-world-9a475.firebaseapp.com",
+    databaseURL: "https://beer-world-9a475.firebaseio.com",
+    projectId: "beer-world-9a475",
+    storageBucket: "beer-world-9a475.appspot.com",
+    messagingSenderId: "391986534008",
+    appId: "1:391986534008:web:1d3901fc00e63a528f3f8d",
+    measurementId: "G-GYW2CZNR3P"
 };
 
 export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
