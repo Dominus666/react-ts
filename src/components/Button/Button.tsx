@@ -3,6 +3,8 @@ import './Button.scss';
 
 interface Props {
   text: string;
+  file?: boolean;
+  onChange?(event: any): any;
 }
 
 const Button: React.FC<Props> = (props) => {

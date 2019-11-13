@@ -7,7 +7,8 @@ interface Props { }
 interface State {
   title: string;
   description: string;
-  img: any[];
+  img: any;
+  imgSrc: any;
   [name: string]: any;
 }
 
@@ -17,27 +18,30 @@ class CreatePost extends React.Component<Props, State> {
     this.state = {
       title: '',
       description: '',
-      img: []
+      img: '',
+      imgSrc: ''
     }
 
   }
-  public inputs = [
-    {
-      name: 'title',
-      type: 'text',
-      placeholder: 'title',
-    },
-    {
-      name: 'description',
-      placeholder: 'description',
-      textarea: true
-    }
-  ];
-  public buttons = [
-    {
-      text: 'Create Post',
-    }
-  ];
+  onChangeFile = (event: any) => {
+    const uploadImgs = event.target.files[0];
+    const render = new FileReader();
+      render.readAsDataURL(uploadImgs)
+      render.onload = () => {
+        this.setState({
+          ...this.state,
+          imgSrc: render.result
+        }, () => {console.log(this.state)})
+        
+      }
+    this.setState({
+      ...this.state,
+      img: uploadImgs
+    }, () => console.log(this.state))
+
+    // render.readAsDataURL(uploadImgs)
+
+  };
   handleChange = (event: any) => {
     const target = event.target;
     const value = target.value;
@@ -45,22 +49,43 @@ class CreatePost extends React.Component<Props, State> {
     this.setState({
       [name]: value
     });
-  }
-  render() {
-    const inputsCreatePost = this.inputs.map((input, index) => {
+  };
+  renderInputs = () => {
+    const inputs = [
+      {
+        name: 'title',
+        type: 'text',
+        placeholder: 'title',
+      },
+      {
+        name: 'description',
+        placeholder: 'description',
+        textarea: true
+      }
+    ];
+
+    const inputsCreatePost = inputs.map((input, index) => {
       return <Input name={input.name} type={input.type} placeholder={input.placeholder} textarea={input.textarea} key={index} onChange={this.handleChange} />
     });
-    const buttonsCreatePost = this.buttons.map((button, index) => {
-      return <Button text={button.text} key={index} />
-    });
+    return inputsCreatePost;
+  };
+
+  render() {
+    
+    
     return (
       <div className="create-post-wrapper">
         <div className="post-inputs-wrapper">
-          {inputsCreatePost}
+          {this.renderInputs()}
         </div>
         <div className="post-buttons-wrapper">
-          {buttonsCreatePost}
-          
+          <Button text="Create Post"/>
+          <div className="file-upload">
+            <label htmlFor="file">
+              <Button text="Upload"/>
+            </label>
+            <input type="file" id="file" onChange={(event) => {this.onChangeFile(event)}} />
+          </div>
         </div>
       </div>
     )

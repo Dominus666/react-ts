@@ -7,10 +7,7 @@ const Header: React.FC = () => {
   <div className="header-wrapper">
     <ul>
       <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/posts">Posts</Link>
+        <Link to="/">Posts</Link>
       </li>
       <li>
         <Link to="/create-post">Create post</Link>

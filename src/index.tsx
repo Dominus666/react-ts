@@ -5,23 +5,27 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import reducers from './store/reducers/index';
-import { BrowserRouter as Router }  from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createRootReducer from './store/reducers'
 
 import * as serviceWorker from './serviceWorker';
 
 
+const history = createBrowserHistory();
+const middlewares = [thunk, routerMiddleware(history)];
 const store = createStore(
-  reducers,
-  applyMiddleware(thunk)
+  createRootReducer(history),
+  composeWithDevTools(applyMiddleware(...middlewares)),
 );
 
 const app = (
-  <Router>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
       <App />
-    </Provider>
-  </Router>
+    </ConnectedRouter>
+  </Provider>
 )
 
 ReactDOM.render(app, document.getElementById('root'));
