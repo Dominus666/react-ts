@@ -1,5 +1,6 @@
 let PostDefaultState = {
-  posts: []
+  posts: [{}],
+  post: {}
 };
 
 export default PostDefaultState;

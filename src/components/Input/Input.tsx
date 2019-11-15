@@ -6,7 +6,7 @@ interface Props {
   type?: string;
   placeholder?: string;
   textarea?: boolean;
-  onChange(event: any): void
+  onChange: (event: any) => void;
 }
 
 const Input: React.FC<Props> = (props) => {

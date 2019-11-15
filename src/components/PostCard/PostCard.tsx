@@ -1,9 +1,13 @@
 import React from 'react';
+import './PostCard.scss';
+import { withRouter, RouteComponentProps, Link} from 'react-router-dom';
+import Button from '../Button/Button';
 
-interface Props {
+interface Props extends RouteComponentProps<any>{
   title: string;
   description: string;
   imgSrc: string;
+  id: string;
 }
 
 const PostCard: React.FC<Props> = (props) => {
@@ -18,8 +22,9 @@ const PostCard: React.FC<Props> = (props) => {
       <div className="post-card-description">
         {props.description}
       </div>
+      <Link to={`/post/${props.id}`}><Button text="Read More"/></Link>
     </div>
   )
 };
 
-export default PostCard
+export default withRouter(PostCard)

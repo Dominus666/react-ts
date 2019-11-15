@@ -4,13 +4,13 @@ import './Button.scss';
 interface Props {
   text: string;
   file?: boolean;
-  onChange?(event: any): any;
+  onClick?: (event: any) => any;
 }
 
 const Button: React.FC<Props> = (props) => {
   return (
     <div className="button-wrapper">
-      <button>{props.text}</button>
+      <button onClick={props.onClick}>{props.text}</button>
     </div>
   )
 };

@@ -12,6 +12,9 @@ const Header: React.FC = () => {
       <li>
         <Link to="/create-post">Create post</Link>
       </li>
+      <li>
+        <Link to="/auth">Auth</Link>
+      </li>
     </ul>
   </div>
  )
