@@ -11,7 +11,7 @@ class UserService {
       uid: getUser.data().uid
     }
     return user;
-  }
+  };
 
   static signUp = async (user: any) => {
     const setUserToAuth: any = await Firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
@@ -22,7 +22,18 @@ class UserService {
     };
     await Firebase.firestore().collection("users").doc(newUser.uid).set(newUser);
     return newUser;
+  };
+
+  static autoLogin = async () => {
+    Firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        console.log(user)
+      //  Firebase.database().ref(`users/${user.uid}`).once('value').then(user => {
+      //     this.$store.dispatch('autoLoginUser', user.val())
+      //   })
+      }
+    })
   }
-};
+};;
 
 export default UserService;
